@@ -14,11 +14,11 @@ export default (initPath1, initPath2) => {
   const file2Keys = Object.keys(fileData2);
   const commonKeys = _.sortedUniq(file1Keys.concat(file2Keys).sort());
   const diffs = commonKeys.reduce((acc, key) => {
-    if (!Object.hasOwn(fileData2, key)) {
+    if (!_.has(fileData2, key)) {
       acc.push(toString(fileData1, key, '-'));
       return acc;
     }
-    if (!Object.hasOwn(fileData1, key)) {
+    if (!_.has(fileData1, key)) {
       acc.push(toString(fileData2, key, '+'));
       return acc;
     }
