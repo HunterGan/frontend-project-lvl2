@@ -4,4 +4,8 @@ install: # useful after first clone or del node-modules
 lint: #start eslint
 	npx eslint .
 test: #start testing
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+	npm test
+test-coverage:
+	npm test -- --coverage --coverageProvider=v8
+publish:
+	npm publish
