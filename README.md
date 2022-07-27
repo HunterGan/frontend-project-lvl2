@@ -11,3 +11,7 @@
 # Example for 2 JSON files
 
 [![asciicast](https://asciinema.org/a/aSeJGrj42Ec9NWnPwknUmNtYX.svg)](https://asciinema.org/a/aSeJGrj42Ec9NWnPwknUmNtYX)
+
+# Example for 2 YAML files
+
+[![asciicast](https://asciinema.org/a/Qmr11wnKXhKMtrHtuAyHYS7dc.svg)](https://asciinema.org/a/Qmr11wnKXhKMtrHtuAyHYS7dc)
