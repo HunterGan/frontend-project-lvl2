@@ -15,3 +15,7 @@
 # Example for 2 YAML files
 
 [![asciicast](https://asciinema.org/a/Qmr11wnKXhKMtrHtuAyHYS7dc.svg)](https://asciinema.org/a/Qmr11wnKXhKMtrHtuAyHYS7dc)
+
+# Example for deep files
+
+[![asciicast](https://asciinema.org/a/ot9PxvGDBhVJAKliOoinVjOCn.svg)](https://asciinema.org/a/ot9PxvGDBhVJAKliOoinVjOCn)
