@@ -19,3 +19,7 @@
 # Example for deep files
 
 [![asciicast](https://asciinema.org/a/ot9PxvGDBhVJAKliOoinVjOCn.svg)](https://asciinema.org/a/ot9PxvGDBhVJAKliOoinVjOCn)
+
+# Example plain printout
+
+[![asciicast](https://asciinema.org/a/A8dgUVKGW2a53LP9vjp1ZkA4t.svg)](https://asciinema.org/a/A8dgUVKGW2a53LP9vjp1ZkA4t)

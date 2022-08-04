@@ -3,41 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import process from 'process';
 import fileParse from './src/parsers.js';
+import printOut from './formatters/index.js';
 
 const fileExt = (pathToFile) => path.extname(pathToFile).toLowerCase();
 const fullPath = (pathTofile) => path.resolve(process.cwd(), pathTofile);
 const fileRead = (pathToFile) => fs.readFileSync(pathToFile, 'utf-8');
-
-const printStylish = (diffs) => {
-  const spaces = '  ';
-  const buildPrint = (current, depth = 1) => {
-    if (!_.isObject(current)) {
-      return `${current}`;
-    }
-    const currentIndent = spaces.repeat(depth);
-    const bracketIndent = spaces.repeat(depth - 1);
-    const diffLines = Object.keys(current)
-      .sort((key1, key2) => key1[2] < key2[2])
-      .map((key) => `${currentIndent}${key}: ${buildPrint(current[key], depth + 2)}`);
-    return [
-      '{',
-      ...diffLines,
-      `${bracketIndent}}`,
-    ].join('\n');
-  };
-  return buildPrint(diffs);
-};
-
-const printOut = (diffs, printStyle = 'stylish') => {
-  switch (printStyle) {
-    case ('stylish'): {
-      return printStylish(diffs);
-    }
-    default: {
-      return 'aaaaa';
-    }
-  }
-};
 
 const buildDiff = (object1, object2) => {
   const keys1 = Object.keys(object1) ?? [];
@@ -62,7 +32,8 @@ const buildDiff = (object1, object2) => {
       return acc;
     }
     if (_.isObject(object2[key])) {
-      acc[`  ${key}`] = `- ${object1[key]}\n${buildDiff({}, object2[key])}`;
+      acc[`- ${key}`] = object1[key];
+      acc[`+ ${key}`] = buildDiff((object2[key]), object2[key]);
       return acc;
     }
     if (object1[key] === object2[key]) {
