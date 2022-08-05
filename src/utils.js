@@ -16,7 +16,8 @@ const buildDiff = (object1, object2) => {
     if (!_.has(object2, key)) {
       acc[`${minus}${key}`] = (_.isObject(object1[key])) ? buildDiff(object1[key], object1[key]) : object1[key];
       return acc;
-    } if (!_.has(object1, key)) {
+    } 
+    if (!_.has(object1, key)) {
       acc[`${plus}${key}`] = (_.isObject(object2[key])) ? buildDiff(object2[key], object2[key]) : object2[key];
       return acc;
     }
@@ -28,8 +29,7 @@ const buildDiff = (object1, object2) => {
         acc[`${plus}${key}`] = object2[key];
       }
       return acc;
-    }
-    if (_.isObject(object2[key])) {
+    } else if (_.isObject(object2[key])) {
       acc[`${minus}${key}`] = object1[key];
       acc[`${plus}${key}`] = buildDiff((object2[key]), object2[key]);
       return acc;
