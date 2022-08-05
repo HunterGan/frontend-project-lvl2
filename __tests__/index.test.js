@@ -19,7 +19,7 @@ test('Test2: 2 deep YAML files', () => {
 });
 
 test('Test3: 2 deep JSON and YAML files stylish', () => {
-  expect(genDiff(path1, path4yml, 'stylish')).toEqual(testStylish);
+  expect(genDiff(path1json, path4yml, 'stylish')).toEqual(testStylish);
 });
 
 test('Test4: 2 deep files plain', () => {
