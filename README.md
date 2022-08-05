@@ -1,3 +1,11 @@
+The following repository contains the util that finds the differ between 2 files.
+Input format of files: **JSON**, **YAML**.
+Output formats: **Stylish**, **Plain**, **JSON**.
+
+# How to use
+
+**gendiff --format <type> file1.json file2.json**
+
 ### Hexlet tests and linter status:
 
 [![Actions Status](https://github.com/HunterGan/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/HunterGan/frontend-project-lvl2/actions)
@@ -23,3 +31,7 @@
 # Example plain printout
 
 [![asciicast](https://asciinema.org/a/A8dgUVKGW2a53LP9vjp1ZkA4t.svg)](https://asciinema.org/a/A8dgUVKGW2a53LP9vjp1ZkA4t)
+
+# Example json printout
+
+[![asciicast](https://asciinema.org/a/tHvPHXqqAp1bIacsOlZskihVx.svg)](https://asciinema.org/a/tHvPHXqqAp1bIacsOlZskihVx)
