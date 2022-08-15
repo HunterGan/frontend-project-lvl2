@@ -9,13 +9,15 @@ export default (diffs) => {
     const currentIndent = operationType.unchanged.repeat(depth);
     const bracketIndent = operationType.unchanged.repeat(depth - 1);
     const diffLines = current.map((currentChild) => {
+      const buildString = (operation, value) => `${currentIndent}${operation}${currentChild.key}: ${buildPrint(value, depth + 2)}`;
+      const currentValue = currentChild.value;
       const keyType = currentChild.type;
       if (keyType === 'updated') {
-        return [`${currentIndent}${operationType.removed}${currentChild.key}: ${buildPrint(currentChild.value[0], depth + 2)}`,
-          `${currentIndent}${operationType.added}${currentChild.key}: ${buildPrint(currentChild.value[1], depth + 2)}`]
+        return [buildString(operationType.removed, currentValue[0]),
+          buildString(operationType.added, currentValue[1])]
           .join('\n');
       }
-      return `${currentIndent}${operationType[keyType]}${currentChild.key}: ${buildPrint(currentChild.value, depth + 2)}`;
+      return buildString(operationType[keyType], currentValue);
     });
     return [
       '{',
