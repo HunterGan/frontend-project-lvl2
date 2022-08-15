@@ -1,8 +1,9 @@
 import fileParse from './src/parsers.js';
 import printOut from './formatters/index.js';
 import {
-  fileExt, fullPath, fileRead, buildDiff,
+  fileExt, fullPath, fileRead,
 } from './src/utils.js';
+import buildDiff from './src/buildDiff.js';
 
 export default (initPath1, initPath2, formatType) => {
   const file1Ext = fileExt(initPath1);

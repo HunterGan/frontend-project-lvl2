@@ -3,24 +3,20 @@ import printStylish from './printStylish.js';
 import printJson from './printJson.js';
 
 const printOut = (diffs, format = 'stylish') => {
-  let printStyle;
   switch (format) {
     case ('stylish'): {
-      printStyle = printStylish(diffs);
-      break;
+      return (printStylish(diffs));
     }
     case ('plain'): {
-      printStyle = printPlain(diffs);
-      break;
+      return (printPlain(diffs));
     }
     case ('json'): {
-      printStyle = printJson(diffs);
-      break;
+      return (printJson(diffs));
     }
     default: {
       break;
     }
   }
-  return printStyle;
+  return "Can't define output format";
 };
 export default printOut;
