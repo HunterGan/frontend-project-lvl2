@@ -7,12 +7,11 @@ const buildDiff = (object1, object2) => {
   const diffs = commonKeys.map((key) => {
     if (!_.has(object1, key) || !_.has(object2, key)) {
       const operationType = (!_.has(object1, key)) ? 'added' : 'removed';
-      const nextIterationValue = (operationType === 'added') ? object2[key] : object1[key];
+      const nextValue = (operationType === 'added') ? object2[key] : object1[key];
       return {
         type: operationType,
         key,
-        value: (_.isObject(nextIterationValue)) ? buildDiff(nextIterationValue, nextIterationValue)
-          : nextIterationValue,
+        value: (_.isObject(nextValue)) ? buildDiff(nextValue, nextValue) : nextValue,
       };
     } if (_.isObject(object1[key])) {
       return (_.isObject(object2[key])) ? { type: 'unchanged', key, value: buildDiff(object1[key], object2[key]) }

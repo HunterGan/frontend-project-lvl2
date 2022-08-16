@@ -4,9 +4,6 @@ import printJson from './printJson.js';
 
 const printOut = (diffs, format = 'stylish') => {
   switch (format) {
-    case ('stylish'): {
-      return (printStylish(diffs));
-    }
     case ('plain'): {
       return (printPlain(diffs));
     }
@@ -17,6 +14,6 @@ const printOut = (diffs, format = 'stylish') => {
       break;
     }
   }
-  return "Can't define output format";
+  return (printStylish(diffs));
 };
 export default printOut;
