@@ -15,10 +15,8 @@ const buildDiff = (object1, object2) => {
           : nextIterationValue,
       };
     } if (_.isObject(object1[key])) {
-      if (_.isObject(object2[key])) {
-        return { type: 'unchanged', key, value: buildDiff(object1[key], object2[key]) };
-      }
-      return { type: 'updated', key, value: [buildDiff(object1[key], object1[key]), object2[key]] };
+      return (_.isObject(object2[key])) ? { type: 'unchanged', key, value: buildDiff(object1[key], object2[key]) }
+        : { type: 'updated', key, value: [buildDiff(object1[key], object1[key]), object2[key]] };
     } if (_.isObject(object2[key])) {
       return { type: 'updated', key, value: [object1[key], buildDiff((object2[key]), object2[key])] };
     }
