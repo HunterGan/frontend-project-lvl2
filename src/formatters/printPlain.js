@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import buildString from './src/buildPlainString.js';
+import buildString from './buildPlainString.js';
 
 export default (diffs) => {
   const buildPrint = (current, fullPath = []) => {

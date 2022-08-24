@@ -1,7 +1,6 @@
 import { test, expect } from '@jest/globals';
 import fs from 'fs';
 import genDiff from '../index.js';
-import printOut from '../formatters/index.js';
 
 const testStylish = fs.readFileSync('__fixtures__/resultStylish.txt', 'utf-8');
 const testPlain = fs.readFileSync('__fixtures__/resultPlain.txt', 'utf-8');
@@ -29,7 +28,4 @@ test('Test4: 2 deep files plain', () => {
 
 test('Test5: 2 deep files json', () => {
   expect(JSON.parse(genDiff(path1json, path2json, 'json'))).toEqual((JSON.parse(testJson)));
-});
-test('Test6: printOut test', () => {
-  expect(printOut(JSON.parse(testJson))).toEqual(testStylish);
 });
