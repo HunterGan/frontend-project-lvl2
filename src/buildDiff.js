@@ -5,7 +5,7 @@ const buildDiff = (object1, object2 = object1) => {
   const keys1 = Object.keys(object1);
   const keys2 = Object.keys(object2);
   const commonKeys = _.sortBy(_.uniq([...keys1, ...keys2]));
-  const diffs = commonKeys.map((key) => {
+  return commonKeys.map((key) => {
     if (!_.has(object1, key)) {
       return { type: 'added', key, value: buildDiff(object2[key]) };
     }
@@ -20,6 +20,5 @@ const buildDiff = (object1, object2 = object1) => {
     }
     return { type: 'unchanged', key, value: object1[key] };
   });
-  return diffs;
 };
 export default buildDiff;
