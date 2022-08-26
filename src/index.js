@@ -1,21 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import process from 'process';
 import printOut from './formatters/index.js';
 import fileParse from './parsers.js';
 import buildDiff from './buildDiff.js';
-
-export const fileExt = (pathToFile) => path.extname(pathToFile).toLowerCase();
-export const fullPath = (pathTofile) => path.resolve(process.cwd(), pathTofile);
-export const fileRead = (pathToFile) => fs.readFileSync(pathToFile, 'utf-8');
+import { getFullPath, fileRead, getFileType } from './utils.js';
 
 export default (initPath1, initPath2, formatType) => {
-  const file1Ext = fileExt(initPath1);
-  const file2Ext = fileExt(initPath2);
-  const path1 = fullPath(initPath1);
-  const path2 = fullPath(initPath2);
-  const fileData1 = fileParse(fileRead(path1), file1Ext);
-  const fileData2 = fileParse(fileRead(path2), file2Ext);
+  const path1 = getFullPath(initPath1);
+  const path2 = getFullPath(initPath2);
+  const fileData1 = fileParse(fileRead(path1), getFileType(initPath1));
+  const fileData2 = fileParse(fileRead(path2), getFileType(initPath2));
   const diffs = buildDiff(fileData1, fileData2);
   return printOut(diffs, formatType);
 };

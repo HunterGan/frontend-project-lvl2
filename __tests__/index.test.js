@@ -1,14 +1,13 @@
-import { test, expect } from '@jest/globals';
-import fs from 'fs';
 import genDiff from '../index.js';
+import { getFullPath, fileRead } from '../src/utils.js';
 
-const testStylish = fs.readFileSync('__fixtures__/resultStylish.txt', 'utf-8');
-const testPlain = fs.readFileSync('__fixtures__/resultPlain.txt', 'utf-8');
-const testJson = fs.readFileSync('__fixtures__/resultJson.txt', 'utf-8');
-const path1json = '__fixtures__/file1.json';
-const path2json = '__fixtures__/file2.json';
-const path3yaml = '__fixtures__/file1.yaml';
-const path4yml = '__fixtures__/file2.yml';
+const testStylish = fileRead(getFullPath('resultStylish.txt'));
+const testPlain = fileRead(getFullPath('resultPlain.txt'));
+const testJson = fileRead(getFullPath('resultJson.txt'));
+const path1json = 'file1.json';
+const path2json = 'file2.json';
+const path3yaml = 'file1.yaml';
+const path4yml = 'file2.yml';
 
 test('Test1: 2 deep JSON files', () => {
   expect(genDiff(path1json, path2json, 'stylish')).toEqual(testStylish);
