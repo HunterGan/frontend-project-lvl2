@@ -1,13 +1,19 @@
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 import genDiff from '../index.js';
-import { getFullPath, fileRead } from '../src/utils.js';
+import { readFile } from '../src/index.js';
 
-const testStylish = fileRead(getFullPath('resultStylish.txt'));
-const testPlain = fileRead(getFullPath('resultPlain.txt'));
-const testJson = fileRead(getFullPath('resultJson.txt'));
-const path1json = 'file1.json';
-const path2json = 'file2.json';
-const path3yaml = 'file1.yaml';
-const path4yml = 'file2.yml';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const getFixturePath = (filename) => path.resolve(process.cwd(), __dirname, '..', '__fixtures__', filename);
+
+const testStylish = readFile(getFixturePath('resultStylish.txt'));
+const testPlain = readFile(getFixturePath('resultPlain.txt'));
+const testJson = readFile(getFixturePath('resultJson.txt'));
+const path1json = getFixturePath('file1.json');
+const path2json = getFixturePath('file2.json');
+const path3yaml = getFixturePath('file1.yaml');
+const path4yml = getFixturePath('file2.yml');
 
 test('Test1: 2 deep JSON files', () => {
   expect(genDiff(path1json, path2json, 'stylish')).toEqual(testStylish);

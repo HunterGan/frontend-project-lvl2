@@ -1,23 +1,35 @@
 import _ from 'lodash';
 
+const operationType = { removed: '- ', added: '+ ', unchanged: '  ' };
+
+const buildIndent = (depth) => operationType.unchanged.repeat(depth);
+
+const getValue = (initValue, depth) => {
+  if (!_.isObject(initValue)) return `${initValue}`;
+  const sortedKeys = _.sortBy(Object.keys(initValue));
+  const result = sortedKeys.map((key) => `${buildIndent(depth + 1)}${key}: ${getValue(initValue[key], depth + 2)}`).join('\n');
+  return [
+    '{',
+    result,
+    `${buildIndent(depth - 1)}}`,
+  ].join('\n');
+};
+
 export default (diffs) => {
-  const operationType = { removed: '- ', added: '+ ', unchanged: '  ' };
   const buildPrint = (current, depth = 1) => {
-    if (!_.isObject(current)) {
-      return `${current}`;
-    }
-    const currentIndent = operationType.unchanged.repeat(depth);
-    const bracketIndent = operationType.unchanged.repeat(depth - 1);
+    const currentIndent = buildIndent(depth);
+    const bracketIndent = buildIndent(depth - 1);
     const diffLines = current.map((currentChild) => {
-      const buildString = (operation, value) => `${currentIndent}${operation}${currentChild.key}: ${buildPrint(value, depth + 2)}`;
-      const currentValue = currentChild.value;
       const keyType = currentChild.type;
+      if (keyType === 'nested') {
+        return `${currentIndent}${operationType.unchanged}${currentChild.key}: ${buildPrint(currentChild.children, depth + 2)}`;
+      }
       if (keyType === 'updated') {
-        return [buildString(operationType.removed, currentValue[0]),
-          buildString(operationType.added, currentValue[1])]
+        return [`${currentIndent}${operationType.removed}${currentChild.key}: ${getValue(currentChild.value[0], depth + 2)}`,
+          `${currentIndent}${operationType.added}${currentChild.key}: ${getValue(currentChild.value[1], depth + 2)}`]
           .join('\n');
       }
-      return buildString(operationType[keyType], currentValue);
+      return `${currentIndent}${operationType[keyType]}${currentChild.key}: ${getValue(currentChild.value, depth + 2)}`;
     });
     return [
       '{',
