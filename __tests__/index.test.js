@@ -1,8 +1,9 @@
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
+import fs from 'fs';
 import genDiff from '../index.js';
-import { readFile } from '../src/index.js';
 
+const readFile = (pathToFile) => fs.readFileSync(pathToFile, 'utf-8');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.resolve(process.cwd(), __dirname, '..', '__fixtures__', filename);
