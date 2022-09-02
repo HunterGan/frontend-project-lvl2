@@ -14,22 +14,22 @@ const getValue = (initValue, depth) => {
 export default (diffs) => {
   const buildPrint = (current, depth = 0) => {
     const currentIndent = buildIndent(depth);
-    const bracketIndent = buildIndent(depth);
     const diffLines = current.flatMap((currentChild) => {
       const keyType = currentChild.type;
+      const { key } = currentChild;
       if (keyType === 'nested') {
-        return `${currentIndent}${operationType.unchanged}${currentChild.key}: ${buildPrint(currentChild.children, depth + 1)}`;
+        return `${currentIndent}${operationType.unchanged}${key}: ${buildPrint(currentChild.children, depth + 1)}`;
       }
       if (keyType === 'updated') {
-        return [`${currentIndent}${operationType.removed}${currentChild.key}: ${getValue(currentChild.value[0], depth + 1)}`,
-          `${currentIndent}${operationType.added}${currentChild.key}: ${getValue(currentChild.value[1], depth + 1)}`];
+        return [`${currentIndent}${operationType.removed}${key}: ${getValue(currentChild.value[0], depth + 1)}`,
+          `${currentIndent}${operationType.added}${key}: ${getValue(currentChild.value[1], depth + 1)}`];
       }
-      return `${currentIndent}${operationType[keyType]}${currentChild.key}: ${getValue(currentChild.value, depth + 1)}`;
+      return `${currentIndent}${operationType[keyType]}${key}: ${getValue(currentChild.value, depth + 1)}`;
     });
     return [
       '{',
       ...diffLines,
-      `${bracketIndent}}`,
+      `${currentIndent}}`,
     ].join('\n');
   };
   return buildPrint(diffs);
