@@ -25,10 +25,7 @@ export default (diffs) => {
       if (keyType === 'added') {
         return getFullString(currentPath, keyType, ` with value: ${toStringValue(currentChild.value)}`);
       }
-      if (keyType === 'removed') {
-        return getFullString(currentPath, keyType);
-      }
-      return null;
+      return (keyType === 'removed') ? getFullString(currentPath, keyType) : null;
     });
     return _.flattenDeep(diffLines.filter((line) => line)).join('\n');
   };
