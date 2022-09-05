@@ -2,7 +2,9 @@ import _ from 'lodash';
 
 const operationType = { removed: '  - ', added: '  + ', unchanged: '    ' };
 
-const buildIndent = (depth) => operationType.unchanged.repeat(depth);
+const indent = '    ';
+
+const buildIndent = (depth) => indent.repeat(depth);
 
 const getValue = (initValue, depth) => {
   if (!_.isObject(initValue)) return `${initValue}`;
@@ -15,16 +17,15 @@ export default (diffs) => {
   const buildPrint = (current, depth = 0) => {
     const currentIndent = buildIndent(depth);
     const diffLines = current.flatMap((currentChild) => {
-      const keyType = currentChild.type;
-      const { key } = currentChild;
-      if (keyType === 'nested') {
+      const { key, type } = currentChild;
+      if (type === 'nested') {
         return `${currentIndent}${operationType.unchanged}${key}: ${buildPrint(currentChild.children, depth + 1)}`;
       }
-      if (keyType === 'updated') {
+      if (type === 'updated') {
         return [`${currentIndent}${operationType.removed}${key}: ${getValue(currentChild.value[0], depth + 1)}`,
           `${currentIndent}${operationType.added}${key}: ${getValue(currentChild.value[1], depth + 1)}`];
       }
-      return `${currentIndent}${operationType[keyType]}${key}: ${getValue(currentChild.value, depth + 1)}`;
+      return `${currentIndent}${operationType[type]}${key}: ${getValue(currentChild.value, depth + 1)}`;
     });
     return [
       '{',
