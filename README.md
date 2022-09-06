@@ -25,7 +25,7 @@ gh repo clone HunterGan/frontend-project-lvl2
 ```
 2. Change the working direcctory:
 ```
-$ cd cd frontend-project-lvl2
+$ cd frontend-project-lvl2
 ```
 3. Install dependencies:
 ```
@@ -50,6 +50,7 @@ _Options:_
 ```
 
 **gendiff file1.yaml file2.yml**
+
 **gendiff --format plain file1.json file2.json**
 
 ### Example for 2 JSON files
