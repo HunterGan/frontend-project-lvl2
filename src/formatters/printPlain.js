@@ -11,21 +11,16 @@ export default (diffs) => {
     const keyType = currentChild.type;
     const currentPath = [...fullPath, currentChild.key].join('.');
     switch (keyType) {
-      case 'nested': {
+      case 'nested':
         return buildPrint(currentChild.children, [currentPath]);
-      }
-      case 'updated': {
+      case 'updated':
         return `Property '${currentPath}' was updated. From ${toStringValue(currentChild.value[0])} to ${toStringValue(currentChild.value[1])}`;
-      }
-      case 'added': {
+      case 'added':
         return `Property '${currentPath}' was added with value: ${toStringValue(currentChild.value)}`;
-      }
-      case 'removed': {
+      case 'removed':
         return `Property '${currentPath}' was removed`;
-      }
-      case 'unchanged': {
+      case 'unchanged':
         return null;
-      }
       default: {
         throw new Error('Something went wrong');
       }

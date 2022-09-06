@@ -21,18 +21,15 @@ export default (diffs) => {
     const diffLines = current.flatMap((currentChild) => {
       const { key, type } = currentChild;
       switch (type) {
-        case 'nested': {
+        case 'nested':
           return `${currentIndent}${indent}${key}: ${buildPrint(currentChild.children, depth + 1)}`;
-        }
-        case 'updated': {
+        case 'updated':
           return [`${currentIndent}${operationIndent.removed}${key}: ${getValue(currentChild.value[0], depth + 1)}`,
             `${currentIndent}${operationIndent.added}${key}: ${getValue(currentChild.value[1], depth + 1)}`];
-        }
         case 'removed':
         case 'added':
-        case 'unchanged': {
+        case 'unchanged':
           return `${currentIndent}${operationIndent[type]}${key}: ${getValue(currentChild.value, depth + 1)}`;
-        }
         default: throw new Error('Something went wrong');
       }
     });

@@ -4,18 +4,14 @@ import printJson from './printJson.js';
 
 const printOut = (diffs, format = 'stylish') => {
   switch (format) {
-    case ('plain'): {
+    case ('plain'):
       return printPlain(diffs);
-    }
-    case ('json'): {
+    case ('json'):
       return printJson(diffs);
-    }
-    case ('stylish'): {
+    case ('stylish'):
       return printStylish(diffs);
-    }
-    default: {
+    default:
       throw new Error(`Format ${format} is not supported!`);
-    }
   }
 };
 export default printOut;
