@@ -22,7 +22,7 @@ export default (diffs) => {
       const { key, type } = currentChild;
       switch (type) {
         case 'nested': {
-          return `${currentIndent}${operationIndent.unchanged}${key}: ${buildPrint(currentChild.children, depth + 1)}`;
+          return `${currentIndent}${indent}${key}: ${buildPrint(currentChild.children, depth + 1)}`;
         }
         case 'updated': {
           return [`${currentIndent}${operationIndent.removed}${key}: ${getValue(currentChild.value[0], depth + 1)}`,
