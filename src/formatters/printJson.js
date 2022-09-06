@@ -1,4 +1,1 @@
-export default (diffs) => {
-  const result = JSON.stringify(diffs);
-  return result;
-};
+export default (diffs) => JSON.stringify(diffs);
