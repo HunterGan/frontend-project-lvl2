@@ -8,6 +8,6 @@ export default (initialData, formatType) => {
     case 'json':
       return JSON.parse(initialData);
     default:
-      throw new Error(`Unknown type of file - ${formatType}`);
+      throw new Error(`Unsupported type of file - ${formatType}`);
   }
 };

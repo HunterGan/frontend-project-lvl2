@@ -16,22 +16,18 @@ const path2json = getFixturePath('file2.json');
 const path3yaml = getFixturePath('file1.yaml');
 const path4yml = getFixturePath('file2.yml');
 
-test('Test1: 2 deep JSON files', () => {
+test('Test1: 2 deep JSON files => Output "Stylish"', () => {
   expect(genDiff(path1json, path2json, 'stylish')).toEqual(testStylish);
 });
 
-test('Test2: 2 deep YAML files', () => {
-  expect(genDiff(path3yaml, path4yml, 'stylish')).toEqual(testStylish);
+test('Test2: 2 deep YAML files => Output "Plain"', () => {
+  expect(genDiff(path3yaml, path4yml, 'plain')).toEqual(testPlain);
 });
 
-test('Test3: 2 deep JSON and YAML files stylish', () => {
-  expect(genDiff(path1json, path4yml, 'stylish')).toEqual(testStylish);
+test('Test3: 2 deep JSON and YAML files => Output "JSON"', () => {
+  expect(genDiff(path1json, path4yml, 'json')).toEqual(testJson);
 });
 
-test('Test4: 2 deep files plain', () => {
-  expect(genDiff(path1json, path2json, 'plain')).toEqual(testPlain);
-});
-
-test('Test5: 2 deep files json', () => {
-  expect(JSON.parse(genDiff(path1json, path2json, 'json'))).toEqual((JSON.parse(testJson)));
+test('Test4: 2 deep files without param=> Output default "Stylish"', () => {
+  expect(genDiff(path1json, path2json)).toEqual(testStylish);
 });

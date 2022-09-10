@@ -3,8 +3,8 @@ import _ from 'lodash';
 const operationIndent = { removed: '  - ', added: '  + ', unchanged: '    ' };
 
 const indentFiller = ' ';
-const indentCount = 4;
-const indent = indentFiller.repeat(indentCount);
+const indentSize = 4;
+const indent = indentFiller.repeat(indentSize);
 
 const buildIndent = (depth) => indent.repeat(depth);
 
@@ -12,7 +12,8 @@ const getValue = (initValue, depth) => {
   if (!_.isObject(initValue)) return `${initValue}`;
   const keys = Object.keys(initValue);
   const result = keys.map((key) => `${buildIndent(depth + 1)}${key}: ${getValue(initValue[key], depth + 1)}`).join('\n');
-  return ['{', result, `${buildIndent(depth)}}`].join('\n');
+  return ['{', result, `${buildIndent(depth)}}`]
+    .join('\n');
 };
 
 export default (diffs) => {

@@ -8,9 +8,9 @@ const toStringValue = (value) => {
 
 export default (diffs) => {
   const buildPrint = (current, fullPath = []) => current.map((currentChild) => {
-    const keyType = currentChild.type;
-    const currentPath = [...fullPath, currentChild.key].join('.');
-    switch (keyType) {
+    const { key, type } = currentChild;
+    const currentPath = [...fullPath, key].join('.');
+    switch (type) {
       case 'nested':
         return buildPrint(currentChild.children, [currentPath]);
       case 'updated':
@@ -22,7 +22,7 @@ export default (diffs) => {
       case 'unchanged':
         return null;
       default: {
-        throw new Error('Something went wrong');
+        throw new Error(`Unknown type of key ${type}`);
       }
     }
   }).filter((line) => line).join('\n');

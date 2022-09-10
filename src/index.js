@@ -10,7 +10,7 @@ const getFullPath = (pathTofile) => path.resolve(process.cwd(), pathTofile);
 
 const readFile = (pathToFile) => fs.readFileSync(pathToFile, 'utf-8');
 
-export default (initPath1, initPath2, formatType) => {
+export default (initPath1, initPath2, formatType = 'stylish') => {
   const path1 = getFullPath(initPath1);
   const path2 = getFullPath(initPath2);
   const inputData1 = parseData(readFile(path1), getFileType(initPath1));
