@@ -10,6 +10,7 @@ The following repository contains the util that finds the differ between 2 files
 Input format of files: **JSON**, **YAML**.
 Output formats: **Stylish**, **Plain**, **JSON**.
 
+**Used technologies:** JavaScript, Commander.js, NPM, Jest.
 ## Installation
 
 1. Clone the repository:
